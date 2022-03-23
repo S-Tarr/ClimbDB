@@ -1,3 +1,16 @@
+# Making the docker container for MySQL
+
+```bash
+docker pull mysql
+```
+
+```bash
+docker run -dit --name MySQL -e MYSQL_ROOT_PASSWORD=root -v /local/path/for/database/data:/var/lib/mysql -p 3306:3306 mysql
+```
+
+In MySQL, run ```ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root'```
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
