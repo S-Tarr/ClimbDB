@@ -81,3 +81,19 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Getting backend started
+
+### `cd server` change to server directory
+
+### `nodemon index` starts server up
+
+Must have db running for server to work or else it may crash and require a restart.
+
+You must also `npm install <>`:
+1. `axios` to the frontend
+2. `mysql2` to the backend
+3. `sequalize` to the backend
+4. `express` to the backend
+
+`npm install` or `npm ci` should cover this but incase it doesn't you can manually install them.
