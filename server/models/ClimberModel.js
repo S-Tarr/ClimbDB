@@ -4,10 +4,6 @@ import db from "../config/database.js";
 const { DataTypes } = Sequelize;
  
 const Product = db.define('Climber',{
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true
-    },
     name:{
         type: DataTypes.STRING
     }//, 
