@@ -10,6 +10,39 @@ docker run -dit --name MySQL -e MYSQL_ROOT_PASSWORD=root -v /local/path/for/data
 
 In MySQL, run ```ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root'```
 
+# Environment Variables
+
+Create a file named `.env` in the `server` directory and add the following environment variables to it.
+Change the values according to what you need.
+
+```bash
+SERVER_PORT = 4000
+SQL_PORT = 3306
+DATABASE_NAME = 'climb'
+SQL_USERNAME = 'root'
+SQL_PASSWORD = 'root'
+CLIMBER_TABLE = 'Climbers'
+```
+
+If you add functionality that requires another variable,
+let the group know and add it to the README.
+
+# Getting backend started
+
+### `cd server` change to server directory
+
+### `nodemon index` starts server up
+
+Must have db running for server to work or else it may crash and require a restart.
+
+You must also `npm install <>`:
+1. `axios` to the frontend
+2. `mysql2` to the backend
+3. `sequalize` to the backend
+4. `express` to the backend
+
+`npm install` or `npm ci` should cover this but incase it doesn't you can manually install them.
+
 
 # Getting Started with Create React App
 
@@ -82,18 +115,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# Getting backend started
-
-### `cd server` change to server directory
-
-### `nodemon index` starts server up
-
-Must have db running for server to work or else it may crash and require a restart.
-
-You must also `npm install <>`:
-1. `axios` to the frontend
-2. `mysql2` to the backend
-3. `sequalize` to the backend
-4. `express` to the backend
-
-`npm install` or `npm ci` should cover this but incase it doesn't you can manually install them.

@@ -8,7 +8,7 @@ const AddClimber = () => {
  
     const saveClimber = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/climbers',{
+        await axios.post('http://localhost:4000/climbers',{
             name: name,
         });
         history("/");

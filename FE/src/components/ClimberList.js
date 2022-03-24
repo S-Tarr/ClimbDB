@@ -11,12 +11,12 @@ const ClimberList = () => {
     }, []);
  
     const getClimbers = async () => {
-        const response = await axios.get('http://localhost:5000/climbers');
+        const response = await axios.get('http://localhost:4000/climbers');
         setClimber(response.data);
     }
  
     const deleteClimber = async (id) => {
-        await axios.delete(`http://localhost:5000/climbers/${id}`);
+        await axios.delete(`http://localhost:4000/climbers/${id}`);
         getClimbers();
     }
  
