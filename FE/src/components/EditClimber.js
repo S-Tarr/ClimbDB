@@ -67,7 +67,6 @@ const EditClimber = () => {
 				</div>
 				<div>
 					<label>Gender</label>
-					{/* <Select options={options} value={options[(isMale ? 1 : 0)]} onChange={ (e) => setGender(e.value) } /> */}
 					<select name="gender_dropdown" value={(isMale ? 1 : 0)} onChange={ (e) => setGender(e.target.value) }>
 						<option value="" disabled>Select gender</option>
 						<option value="1">Male</option>
