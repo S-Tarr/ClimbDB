@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-// import Select from 'react-select';
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
  
@@ -11,11 +10,6 @@ const EditClimber = () => {
 	const [isMale, setGender] = useState(0);
 	const history = useNavigate();
 	const { id } = useParams();
-
-	// const options = [
-	// 		{value: '0', label: 'Female'},
-	// 		{value: '1', label: 'Male'}
-	// ]
  
 	const updateClimber = async (e) => {
 		e.preventDefault();
