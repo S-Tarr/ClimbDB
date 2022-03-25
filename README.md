@@ -10,6 +10,22 @@ docker run -dit --name MySQL -e MYSQL_ROOT_PASSWORD=root -v /local/path/for/data
 
 In MySQL, run ```ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root'```
 
+## Making Climbers table
+
+the `createdAt` and `updatedAt` fields are automaticalluy used by Sequelize.
+
+```SQL
+CREATE TABLE Climbers(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    weight INT,
+    hometown VARCHAR(255),
+    isMale BOOLEAN,
+    createdAt DATETIME,
+    updatedAt DATETIME
+);
+```
+
 # Environment Variables
 
 Create a file named `.env` in the `server` directory and add the following environment variables to it.
