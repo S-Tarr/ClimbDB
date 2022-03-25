@@ -54,7 +54,7 @@ Must have db running for server to work or else it may crash and require a resta
 You must also `npm install <>`:
 1. `axios` to the frontend
 2. `mysql2` to the backend
-3. `sequalize` to the backend
+3. `sequelize` to the backend
 4. `express` to the backend
 
 `npm install` or `npm ci` should cover this but incase it doesn't you can manually install them.
