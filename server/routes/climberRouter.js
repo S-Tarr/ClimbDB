@@ -1,12 +1,12 @@
 import express from "express";
  
 import { 
-    getAllClimbers,
-    createClimber,
-    getClimberById,
-    updateClimber,
-    deleteClimber
-} from "../controllers/Climber.js";
+	getAllClimbers,
+	createClimber,
+	getClimberById,
+	updateClimber,
+	deleteClimber
+} from "../controllers/ClimberController.js";
  
 const router = express.Router();
  

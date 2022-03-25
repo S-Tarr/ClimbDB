@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
+import 'dotenv/config.js';
 
 function Climber() {
 
@@ -11,7 +12,7 @@ function Climber() {
     }, []);
  
     const getClimbers = async () => {
-        const response = await axios.get('http://localhost:5000/climbers');
+        const response = await axios.get(`http://localhost:4000/climbers`);
         setClimber(response.data);
     }
 

@@ -1,16 +1,16 @@
 import express from "express";
 import 'dotenv/config.js';
 import db from "./config/database.js";
-import climberRoutes from "./routes/climberRouter.js";
+import climberRoutes from "./routes/ClimberRouter.js";
 import cors from "cors";
 
 const app = express();
  
 try {
-    await db.authenticate();
-    console.log('Database connected...');
+	await db.authenticate();
+	console.log('Database connected...');
 } catch (error) {
-    console.error('Connection error:', error);
+	console.error('Connection error:', error);
 }
  
 app.use(cors());
