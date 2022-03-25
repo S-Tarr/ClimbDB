@@ -17,7 +17,6 @@ export const getClimberById = async (req, res) => {
 				id: req.params.id
 			}
 		});
-		console.log(climber);
 		res.json(climber[0]);
 	} catch (error) {
 		res.json({ message: error.message });
@@ -26,7 +25,8 @@ export const getClimberById = async (req, res) => {
  
 export const createClimber = async (req, res) => {
 	try {
-		await Climber.create({name: req.body.name, weight: req.body.weight, hometown: req.body.hometown, isMale: req.body.isMale});
+		// await Climber.create({name: req.body.name, weight: req.body.weight, hometown: req.body.hometown, isMale: req.body.isMale});
+		await Climber.create(req.body);
 		res.json({
 			"message": "Climber Created"
 		});
