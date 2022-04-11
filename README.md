@@ -26,6 +26,19 @@ CREATE TABLE Climbers(
 );
 ```
 
+```SQL
+CREATE TABLE Events(
+    
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    location VARCHAR(255),
+    startTime DATE,
+    endTime DATE,
+    createdAt DATETIME,
+    updatedAt DATETIME
+);
+```
+
+
 # Environment Variables
 
 Create a file named `.env` in the `server` directory and add the following environment variables to it.
@@ -38,6 +51,7 @@ DATABASE_NAME = 'climb'
 SQL_USERNAME = 'root'
 SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
+EVENT_TABLE = 'Events'
 ```
 
 If you add functionality that requires another variable,

@@ -6,7 +6,7 @@ const NavBar= () =>{
   return (
     <header>
     <div className={classes.title}>
-        <a>Climber DB</a>
+        <a> <Link to="/main">Climb DB</Link></a>
     </div>
 <div className={classes.mid}>
     <ul className = {classes.nav}>

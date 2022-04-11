@@ -7,8 +7,9 @@ const MainPage = () => {
  
 	return (
         <div>
-          MAINPAGE
+          <img src="Titlepage.png" className={classes.img}/>
         </div>
+        
         );
  
 	
