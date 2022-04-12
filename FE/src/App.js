@@ -6,6 +6,7 @@ import EditClimber from "./components/EditClimber";
 import MainPage from "./components/MainPage.js";
 import NavBar from "./components/NavBar.js";
 import EventList from "./components/WCCList";
+import RankList from "./components/RankList";
 function App() {
   return (
     <Router>
@@ -18,7 +19,8 @@ function App() {
             <Route exact path="/" element={<ClimberList />}/>
             <Route path="/add" element={<AddClimber />}/>
             <Route path="/edit/:id" element={<EditClimber />}/>
-            <Route path="events" element={<EventList />}/>
+            <Route path="/events" element={<EventList />}/>
+            <Route path="/ranks" element={<RankList />}/>
           </Routes>
         </div>
       </div>

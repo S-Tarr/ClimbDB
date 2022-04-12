@@ -37,6 +37,16 @@ CREATE TABLE Events(
     updatedAt DATETIME
 );
 ```
+```SQL
+CREATE TABLE Ranks(
+    id INT PRIMARY KEY AUTO_INCREMENT, 
+    Name VARCHAR(255),
+    ClimberID INT, 
+    Points FLOAT(6, 2), 
+    createdAt DATETIME, 
+    updatedAt DATETIME
+);
+```
 
 
 # Environment Variables
@@ -51,7 +61,8 @@ DATABASE_NAME = 'climb'
 SQL_USERNAME = 'root'
 SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
-EVENT_TABLE = 'Events'
+RANK_TABLE = 'Ranks'
+
 ```
 
 If you add functionality that requires another variable,
