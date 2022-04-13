@@ -61,6 +61,7 @@ DATABASE_NAME = 'climb'
 SQL_USERNAME = 'root'
 SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
+EVENT_TABLE = 'Events'
 RANK_TABLE = 'Ranks'
 
 ```
