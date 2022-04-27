@@ -17,7 +17,10 @@ const NavBar= () =>{
             <Link to="/events">Events</Link>
         </li>
         <li>
-            <Link to="/wr">World Records</Link>
+        <Link to="/wr">World Records</Link>
+        </li>
+        <li>
+            <Link to="/ranks">Ranking</Link>
         </li>
         
     </ul>
