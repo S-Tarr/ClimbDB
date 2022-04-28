@@ -1,0 +1,33 @@
+.maintable {
+    font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  background-color:#09628b;
+  text-align:center;
+  margin: auto;
+
+  
+}
+
+.maintable thead > tr >th{
+    padding: 20px 140px;
+    font-weight: 3000;
+  line-height: 1.42em;
+    background-color:#09628b;
+    color: white;
+
+    visibility:"hidden";
+    
+   
+}
+
+
+.maintable thead > tr >th:hover {
+    color: #000000;
+  }
+.maintable td {
+    padding: 20px 140px;
+    background-color:rgb(168, 225, 251);
+    
+    
+}

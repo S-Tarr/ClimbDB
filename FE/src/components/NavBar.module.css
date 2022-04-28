@@ -1,0 +1,60 @@
+.nav {
+    
+    background-color: #3D99CE;
+    text-align: center;
+  }
+  .nav > li {
+    display: inline-block;
+    padding: 10px 80px;
+  }
+  .nav > li > a:hover {
+    color: #000000;
+  }
+  .nav > li > a {
+    color: white;
+    text-decoration: none;
+  }
+
+.right {
+	background-color: aqua;
+display: inline-block;
+width: 252px;
+block-size: 70px;
+
+color: #1d19e7;
+}
+
+.right > a{
+    display: inline-block;
+    block-align:center;
+    text-align: center;
+    
+    font-size: 20px;
+    padding: 22px 70px;
+    border: 1px solid #77002e;
+    background-color: white;
+}
+
+.right:hover{
+font-weight:bolder;
+background-color: #2779BF;
+}
+
+.mid {
+	background-color: aqua;
+	display: inline-block;
+    width: 80%;
+    block-size: 70px;
+	margin: auto;
+}
+
+.title {
+    color: #000000;
+    
+    text-align:center;
+    font-size:27px;
+
+    
+}
+  
+
