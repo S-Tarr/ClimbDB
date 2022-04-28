@@ -47,6 +47,36 @@ CREATE TABLE Ranks(
     updatedAt DATETIME
 );
 ```
+```SQL
+CREATE TABLE Admin (
+    UserName VARCHAR(255) PRIMARY KEY,
+    Password VARCHAR(255)
+ );
+ ```
+ ```SQL
+CREATE TABLE Results(
+    WCC_ID INT PRIMARY KEY,
+    Climber_ID INT ,
+    Rank INT,
+    Qualification VARCHAR(255),
+    SemiFinal VARCHAR(255),
+    Final VARCHAR(255),
+    Type VARCHAR,
+    FOREIGN KEY (WCC_ID) REFERENCES Events(id) ,
+    FOREIGN KEY (Climber_ID) REFERENCES Climbers(id)
+);
+```
+```SQL
+CREATE TABLE Records(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    date  DATETIME,
+    eventName VARCHAR(255),
+    eventID int,
+    RecordTime int
+)
+```
+
 
 
 # Environment Variables
