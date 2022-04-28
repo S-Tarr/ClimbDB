@@ -28,7 +28,7 @@ const NavBar= () =>{
 </div>
 
 <div className={classes.right}>
-    <a><Link to="user">USERNAME</Link></a>
+    <a><Link to="login">Login</Link></a>
     </div>
 
 

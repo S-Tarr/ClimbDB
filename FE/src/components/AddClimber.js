@@ -15,7 +15,7 @@ const AddClimber = () => {
 		console.log(weight);
 		console.log(hometown);
 		console.log(isMale);
-		await axios.post('http://localhost:5000/climbers',{
+		await axios.post('http://localhost:4000/climbers',{
 			name: name,
 			weight: weight,
 			hometown: hometown,
