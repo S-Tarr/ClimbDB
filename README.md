@@ -56,12 +56,12 @@ CREATE TABLE Admin (
  ```SQL
 CREATE TABLE Results(
     WCC_ID INT PRIMARY KEY,
-    Climber_ID INT ,
-    Rank INT,
+    Climber_ID INT,
+    ClimberRank INT,
     Qualification VARCHAR(255),
     SemiFinal VARCHAR(255),
     Final VARCHAR(255),
-    Type VARCHAR,
+    EventType VARCHAR(255),
     FOREIGN KEY (WCC_ID) REFERENCES Events(id) ,
     FOREIGN KEY (Climber_ID) REFERENCES Climbers(id)
 );
@@ -72,9 +72,9 @@ CREATE TABLE Records(
     name VARCHAR(255),
     date  DATETIME,
     eventName VARCHAR(255),
-    eventID int,
-    RecordTime int
-)
+    eventID INT,
+    RecordTime INT
+);
 ```
 
 
