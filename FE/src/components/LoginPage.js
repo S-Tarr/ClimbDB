@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-return(
-	//
-)
+const LoginPage = () => {
+	return(
+		<h1>Enter Login Information</h1>
+	);
+}
