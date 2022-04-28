@@ -55,7 +55,7 @@ CREATE TABLE Admin (
  ```
  ```SQL
 CREATE TABLE Results(
-    WCC_ID INT PRIMARY KEY,
+    WCC_ID INT,
     Climber_ID INT,
     ClimberRank INT,
     Qualification VARCHAR(255),
