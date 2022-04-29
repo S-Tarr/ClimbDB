@@ -20,6 +20,7 @@ from tqdm import tqdm
 
 from event import Event
 from climber import Climber
+from rank import Rank
 
 
 DELAY = 5  # number of seconds to wait until timeout for WebDriverWait
@@ -56,7 +57,7 @@ def parse_results(html) -> list[tuple[str, ...]]:
     soup = BeautifulSoup(html, 'html.parser')
     for row in soup.find_all('tr', class_=['even', 'odd']):
         tds = row.find_all('td')
-        rank, first_name, last_name, _, *scores = [td.find('div') for td in tds]
+        rank, first_name, _, _, *scores = [td.find('div') for td in tds]
 
         # we pretend "do not score" participants did not attend
         if not rank:
@@ -149,6 +150,34 @@ def scrape_climbers(driver: webdriver) -> list[Climber]:
     return climbers
 
 
+def scrape_rankings(driver: webdriver, year: int, category: int) -> list[Rank]:
+    driver.get(f'https://components.ifsc-climbing.org/ranking-complete/?cup=66&category={category}&year={year}')
+    WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.ID, 'table_id_wrapper')))
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    event_type = ["Lead", "Speed", "Boulder"]
+
+    ranks = []
+    for rank in tqdm(soup.find_all('tr', class_=['odd', 'even'])):
+        climber_rank = rank.find('p', class_='rank').getText()
+        climber_id = rank.find('a')['href'].split('id=')[1]
+        points = rank.find_all('p')[-1].getText()
+        ranks.append(Rank(climber_id, climber_rank, points, event_type[category], year))
+        sleep(BETWEEN)
+
+    return ranks
+
+
+def get_rankings(driver: webdriver):
+    years = [2017, 2018, 2019, 2020, 2021]
+    ranks = []
+    for year in years:
+        for category in range(1,3):
+            ranks.append(scrape_rankings(driver, year, category))
+
+    return ranks
+
+
 if __name__ == '__main__':
     options = Options()
     options.add_argument('--headless')
@@ -159,14 +188,18 @@ if __name__ == '__main__':
         # pickle_out = open("climbers.pickle", "wb")
         # pickle.dump(climbers, pickle_out)
         # pickle_out.close()
-        baileys = competitor_competitions(chrome_driver, 1741)
-        pickle_out = open("events.pickle","wb")
-        pickle.dump(baileys, pickle_out)
-        pickle_out.close()
-        pickle_out = open("climberIDs.pickle", "wb")
-        pickle.dump(climberIDs, pickle_out)
-        pickle_out.close()
+        # baileys = competitor_competitions(chrome_driver, 1741)
+        # pickle_out = open("events.pickle","wb")
+        # pickle.dump(baileys, pickle_out)
+        # pickle_out.close()
+        # pickle_out = open("climberIDs.pickle", "wb")
+        # pickle.dump(climberIDs, pickle_out)
+        # pickle_out.close()
 
-        for bailey_event in baileys:
-            bailey_event.to_csv()
+        # for bailey_event in baileys:
+        #     bailey_event.to_csv()
+        ranks = get_rankings(chrome_driver)
+        pickle_out = open("ranks.pickle", "wb")
+        pickle.dump(ranks, pickle_out)
+        pickle_out.close()
     

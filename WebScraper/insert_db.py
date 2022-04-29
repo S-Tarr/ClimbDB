@@ -1,18 +1,17 @@
 import pickle
 import mysql.connector
+from tqdm import tqdm
 
 from climber import Climber
+from rank import Rank
+from event import Event
 
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="root",
-  database="climb",
-<<<<<<< Updated upstream
-  port="3307"
-=======
-  port="3306"
->>>>>>> Stashed changes
+  password="helloworld",
+  database="testapp",
+  port="3308"
 )
 
 
@@ -22,7 +21,7 @@ def insert_climbers():
 
     mycursor = mydb.cursor()
 
-    for climber in climbers:
+    for climber in tqdm(climbers):
         sql = "INSERT IGNORE INTO Climbers (id, name, height, age, hometown) VALUES (%s, %s, %s, %s, %s)"
         val = (climber.id, climber.name.strip(), climber.height, climber.age, climber.hometown.strip())
         mycursor.execute(sql, val)
@@ -37,7 +36,7 @@ def insert_events_and_results():
     
     insert_climbers()
 
-    for bailey_event in baileys:
+    for bailey_event in tqdm(baileys):
 
         sql = "INSERT IGNORE INTO Events (id, eventTime) VALUES (%s, %s)"
         val = (bailey_event.event_id, bailey_event.date)
@@ -60,7 +59,22 @@ def insert_events_and_results():
     mydb.commit()
 
 
+def insert_ranks():
+    pickle_in = open("ranks.pickle", "rb")
+    rankings = pickle.load(pickle_in)
+
+    mycursor = mydb.cursor()
+
+    for ranks in tqdm(rankings):
+        for rank in ranks:
+            sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, Year) VALUES (%s, %s, %s, %s, %s)"
+            val = (rank.rank, rank.id, rank.points, rank.event_type, rank.year)
+            mycursor.execute(sql, val)
+    
+    mydb.commit()
+
 if __name__ == '__main__':
     insert_climbers()
     insert_events_and_results()
+    insert_ranks()
     mydb.close()
