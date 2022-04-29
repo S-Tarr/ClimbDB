@@ -11,6 +11,20 @@ export const getAllResults = async (req, res) => {
 }
  
 
- 
+  
+export const deleteResult = async (req, res) => {
+	try {
+		await Results.destroy({
+			where: {
+				id: req.params.id
+			}
+		});
+		res.json({
+			"message": "Result Deleted"
+		});
+	} catch (error) {
+		res.json({ message: error.message });
+	}  
+}
 
 

@@ -30,6 +30,7 @@ const EventList = () => {
 						<th>Location</th>
 						<th>Start Time</th>
 						<th>End Time</th>
+						<th>Actions</th>
 						
 					</tr>
 				</thead>
