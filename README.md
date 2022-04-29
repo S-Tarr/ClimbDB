@@ -115,6 +115,7 @@ You must also `npm install <>`:
 2. `mysql2` to the backend
 3. `sequelize` to the backend
 4. `express` to the backend
+5. `jsonwebtoken` to the backend
 
 `npm install` or `npm ci` should cover this but incase it doesn't you can manually install them.
 

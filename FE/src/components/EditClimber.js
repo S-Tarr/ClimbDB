@@ -13,7 +13,7 @@ const EditClimber = () => {
  
 	const updateClimber = async (e) => {
 		e.preventDefault();
-		await axios.patch(`http://localhost:5000/climbers/${id}`,{
+		await axios.patch(`http://localhost:4000/climbers/${id}`,{
 			name: name,
 			weight: weight,
 			hometown: hometown,
