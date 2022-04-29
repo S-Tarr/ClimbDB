@@ -14,7 +14,10 @@ const ResultsList = () => {
 		const response = await axios.get(`http://localhost:4000/results`);
 		setResults(response.data);
 	}
- 
+    const deleteResult = async (id) => {
+		await axios.delete(`http://localhost:4000/results/${id}`);
+		getAllResults();
+	}
 
  
 	return (
@@ -31,6 +34,7 @@ const ResultsList = () => {
 						<th>Semi-Final</th>
 						<th>Final</th>
                         <th>Event Type</th>
+                        <th>Actions</th>
 						
 					</tr>
 				</thead>
@@ -45,6 +49,7 @@ const ResultsList = () => {
 							<td>{ result.SemiFinal  }</td>
 							<td>{ result.Final }</td>
                             <td>{ result.EventType }</td>
+                            <td><button onClick={ () => deleteResult(result.id) }>Delete</button></td>
                             
 							
 						</tr>
