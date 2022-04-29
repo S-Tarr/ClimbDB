@@ -6,9 +6,9 @@ from climber import Climber
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="helloworld",
-  database="testapp",
-  port="3308"
+  password="root",
+  database="climb",
+  port="3307"
 )
 
 
@@ -20,7 +20,7 @@ def insert_climbers():
 
     for climber in climbers:
         sql = "INSERT IGNORE INTO Climbers (id, name, height, age, hometown) VALUES (%s, %s, %s, %s, %s)"
-        val = (climber.id, climber.name, climber.height, climber.age, climber.hometown)
+        val = (climber.id, climber.name.strip(), climber.height, climber.age, climber.hometown.strip())
         mycursor.execute(sql, val)
     
     mydb.commit()
