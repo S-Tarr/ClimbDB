@@ -7,6 +7,8 @@ import MainPage from "./components/MainPage.js";
 import NavBar from "./components/NavBar.js";
 import EventList from "./components/WCCList";
 import RankList from "./components/RankList";
+import ResultsList from "./components/ResultsList";
+
 function App() {
   return (
     <Router>
@@ -21,6 +23,7 @@ function App() {
             <Route path="/edit/:id" element={<EditClimber />}/>
             <Route path="/events" element={<EventList />}/>
             <Route path="/ranks" element={<RankList />}/>
+            <Route path="/results" element={<ResultsList />}/>
           </Routes>
         </div>
       </div>

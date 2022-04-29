@@ -31,8 +31,7 @@ CREATE TABLE Events(
     
     id INT PRIMARY KEY AUTO_INCREMENT,
     location VARCHAR(255),
-    startTime DATE,
-    endTime DATE,
+    eventTime DATE,
     createdAt DATETIME,
     updatedAt DATETIME
 );
@@ -55,6 +54,7 @@ CREATE TABLE Admin (
  ```
  ```SQL
 CREATE TABLE Results(
+    id INT, 
     WCC_ID INT,
     Climber_ID INT,
     ClimberRank INT,
@@ -62,6 +62,8 @@ CREATE TABLE Results(
     SemiFinal VARCHAR(255),
     Final VARCHAR(255),
     EventType VARCHAR(255),
+    createdAt DATETIME,
+    updatedAt DATETIME,
     FOREIGN KEY (WCC_ID) REFERENCES Events(id) ,
     FOREIGN KEY (Climber_ID) REFERENCES Climbers(id)
 );
@@ -73,7 +75,9 @@ CREATE TABLE Records(
     date  DATETIME,
     eventName VARCHAR(255),
     eventID INT,
-    RecordTime INT
+    RecordTime INTc
+    createdAt DATETIME,
+    updatedAt DATETIME
 );
 ```
 
