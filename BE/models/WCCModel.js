@@ -9,10 +9,7 @@ const Product = db.define('Event',{
 	location:{
 		type: DataTypes.STRING
 	},
-	startTime:{
-		type: DataTypes.DATE
-	},
-	endTime:{
+	eventTime:{
 		type: DataTypes.DATE
 	}
 },{

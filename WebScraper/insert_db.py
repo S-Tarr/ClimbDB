@@ -8,7 +8,11 @@ mydb = mysql.connector.connect(
   user="root",
   password="root",
   database="climb",
+<<<<<<< Updated upstream
   port="3307"
+=======
+  port="3306"
+>>>>>>> Stashed changes
 )
 
 

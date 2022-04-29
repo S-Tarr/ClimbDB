@@ -54,6 +54,7 @@ CREATE TABLE Admin (
  ```
  ```SQL
 CREATE TABLE Results(
+    id INT PRIMARY KEY AUTO_INCREMENT,
     WCC_ID INT,
     Climber_ID INT,
     ClimberRank INT,
