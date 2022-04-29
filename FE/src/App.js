@@ -14,8 +14,8 @@ import ResultsList from "./components/ResultsList";
 export const UserContext = React.createContext();
 
 function App() {
-  const {token, setToken} = useToken();
-  const ctx = {token, setToken};
+  const {token, valid, username, setToken} = useToken();
+  const ctx = {token, valid, username, setToken};
   return (
     <UserContext.Provider value={ctx}>
       <Router>

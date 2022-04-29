@@ -9,33 +9,52 @@ export const generateToken = async (req, res) => {
 	});
 	try {
 		if(user.length == 0) { // user not found in table
-			res.json({token: "nicetry"});
+			res.json({
+				token: "nicetry",
+				username: ""
+			});
 		} else {
-			console.log(user);
 			if(user[0].dataValues.Password == req.body.password) {
 				const token = jwt.sign(req.body, jwtSecretKey);
-				res.json({token: token});
+				res.json({
+					token: token,
+					username: req.body.username
+				});
 			} else {
-				res.json({token: "nicetry"});
+				res.json({
+					token: "nicetry",
+					username: ""
+				});
 			}
 		}
 	} catch (error) {
-		res.json({token: error.message});
+		res.json({
+			token: error.message,
+			username: ""
+		});
 	}
 }
 
 export const validateToken = async (req, res) => {
-	let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
 	let jwtSecretKey = process.env.JWT_SECRET_KEY;
 	try {
 		const token = req.body.token;
 		const verif = jwt.verify(token, jwtSecretKey);
 		if(verif) {
-			res.send(true);
+			res.json({
+				username: req.body.username,
+				valid: true
+			});
 		} else {
-			res.send(false);
+			res.json({
+				username: "",
+				valid: false
+			});
 		}
 	} catch(e) {
-		res.send(false);
+		res.json({
+			username: "",
+			valid: false
+		});
 	}
 }
