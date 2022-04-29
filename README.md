@@ -96,7 +96,7 @@ SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
 EVENT_TABLE = 'Events'
 RANK_TABLE = 'Ranks'
-
+JWT_SECRET_KEY = 'whateveryouwant'
 ```
 
 If you add functionality that requires another variable,
