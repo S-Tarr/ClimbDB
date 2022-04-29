@@ -37,7 +37,7 @@ const ClimberList = () => {
 				<tbody>
 					{ climbers.map((climber, index) => (
 						<tr key={ climber.id }>
-							<td>{ index + 1 }</td>
+							<td>{ climber.id }</td>
 							<td>{ climber.name }</td>
 							<td>{ climber.weight }</td>
 							<td>{ climber.hometown }</td>

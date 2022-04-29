@@ -28,8 +28,8 @@ const EventList = () => {
 					<tr>
 						<th>Event ID</th>
 						<th>Location</th>
-						<th>Start Time</th>
-						<th>End Time</th>
+						<th>Time</th>
+						
 						<th>Actions</th>
 						
 					</tr>
@@ -37,10 +37,10 @@ const EventList = () => {
 				<tbody>
 					{ events.map((event, index) => (
 						<tr key={ event.WCC_ID }>
-							<td>{ index + 1 }</td>
+							<td>{ event.id}</td>
 							<td>{ event.location }</td>
-							<td>{ event.startTime }</td>
-							<td>{ event.endTime }</td>
+							<td>{ event.eventTime }</td>
+							
 							<td>
 								<button onClick={ () => deleteEvent(event.id) } className="button is-small is-danger">Delete</button>
 							</td>
