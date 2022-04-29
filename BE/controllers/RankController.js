@@ -14,6 +14,8 @@ export const getRanks= async (req, res) => {
 
         
 		res.json(ranks);
+
+		
 	} catch (error) {
 		res.json({ message: error.message });
 		console.log(error)

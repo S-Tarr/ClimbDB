@@ -5,7 +5,7 @@
   }
   .nav > li {
     display: inline-block;
-    padding: 10px 80px;
+    padding: 10px 60px;
   }
   .nav > li > a:hover {
     color: #000000;
@@ -18,7 +18,7 @@
 .right {
 	background-color: aqua;
 display: inline-block;
-width: 252px;
+width: 200px;
 block-size: 70px;
 
 color: #1d19e7;
