@@ -17,6 +17,9 @@ const NavBar= () =>{
             <Link to="/events">Events</Link>
         </li>
         <li>
+            <Link to="/results">Results</Link>
+        </li>
+        <li>
         <Link to="/wr">World Records</Link>
         </li>
         <li>

@@ -11,6 +11,7 @@ import LoginPage from "./components/LoginPage";
 import useToken from "./token.js";
 
 export const UserContext = React.createContext();
+import ResultsList from "./components/ResultsList";
 
 function App() {
   const {token, setToken} = useToken();
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/events" element={<EventList />}/>
                 <Route path="/ranks" element={<RankList />}/>
                 <Route path="/login" element={<LoginPage />}/>
+                <Route path="/results" element={<ResultsList />}/>
               </Routes>
             </div>
           </div>
