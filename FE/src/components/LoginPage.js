@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { UserContext } from '../App';
 import { useContext } from 'react';
+import axios from 'axios';
 
 const LoginPage = () => {
 	const userInfo = useContext(UserContext);
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+
+	const login = async (e) => {
+		e.preventDefault();
+		const response = await axios.post("http://localhost:4000/auth", {
+			username: username,
+			password: password
+		});
+		console.log(response.data["auth"]);
+	}
 
 	if(!userInfo.isAdmin) {
 		return(
 			<div>
 				<h1>Enter Login Information</h1>
-				<form onSubmit={() => userInfo.toggle(!userInfo.isAdmin)}>
+				{/* <form onSubmit={() => userInfo.toggle(!userInfo.isAdmin)}> */}
+				<form onSubmit={login}>
 					<div>
 						<label>Username</label>
 						<input
 							type="text"
 							placeholder="Username"
+							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</div>
 					<div>
 						<label>Password</label>
 						<input
 							type="password"
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
-					<button className="button is-primary">Login</button>
+					<button className="button is-primary" type='submit'>Login</button>
 				</form>
 			</div>
 		);
