@@ -13,7 +13,6 @@ import useToken from "./token.js";
 export const UserContext = React.createContext();
 
 function App() {
-  // const [token, setToken] = useState(false);
   const {token, setToken} = useToken();
   const ctx = {token, setToken};
   return (
