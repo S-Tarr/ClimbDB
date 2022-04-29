@@ -16,9 +16,10 @@ the `createdAt` and `updatedAt` fields are automaticalluy used by Sequelize.
 
 ```SQL
 CREATE TABLE Climbers(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY,
     name VARCHAR(255),
-    weight INT,
+    height INT,
+    age INT,
     hometown VARCHAR(255),
     isMale BOOLEAN,
     createdAt DATETIME,
@@ -28,11 +29,9 @@ CREATE TABLE Climbers(
 
 ```SQL
 CREATE TABLE Events(
-    
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT PRIMARY KEY,
     location VARCHAR(255),
-    startTime DATE,
-    endTime DATE,
+    eventTime VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME
 );
@@ -55,7 +54,7 @@ CREATE TABLE Admin (
  ```
  ```SQL
 CREATE TABLE Results(
-    WCC_ID INT PRIMARY KEY,
+    WCC_ID INT,
     Climber_ID INT,
     ClimberRank INT,
     Qualification VARCHAR(255),
