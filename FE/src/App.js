@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState } from 'react';
 import ClimberList from "./components/ClimberList";
 import AddClimber from "./components/AddClimber";
 import EditClimber from "./components/EditClimber";
@@ -9,15 +8,14 @@ import NavBar from "./components/NavBar.js";
 import EventList from "./components/WCCList";
 import RankList from "./components/RankList";
 import LoginPage from "./components/LoginPage";
+import useToken from "./token.js";
 
-export const UserContext = React.createContext({
-  isAdmin: false,
-  toggle: () => {}
-});
+export const UserContext = React.createContext();
 
 function App() {
-  const [isAdmin, toggle] = useState(false);
-  const ctx = {isAdmin, toggle}
+  // const [token, setToken] = useState(false);
+  const {token, setToken} = useToken();
+  const ctx = {token, setToken};
   return (
     <UserContext.Provider value={ctx}>
       <Router>

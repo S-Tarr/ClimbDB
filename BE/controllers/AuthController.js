@@ -6,13 +6,13 @@ export const verifyLogin = async (req, res) => {
 	});
 	try {
 		if(user.length == 0) { // user not found in table
-			res.json({auth: false});
+			res.json({token: "nottesttoken"});
 		} else {
 			console.log(user);
 			if(user[0].dataValues.Password == req.body.password) {
-				res.send({auth: true});
+				res.json({token: "testtoken"});
 			} else {
-				res.send({auth: false});
+				res.json({token: "nottesttoken"});
 			}
 		}
 	} catch (error) {

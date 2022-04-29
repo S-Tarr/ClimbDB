@@ -14,14 +14,13 @@ const LoginPage = () => {
 			username: username,
 			password: password
 		});
-		console.log(response.data["auth"]);
+		userInfo.setToken({token: response.data.token});
 	}
 
-	if(!userInfo.isAdmin) {
+	if(userInfo.token != "testtoken") {
 		return(
 			<div>
 				<h1>Enter Login Information</h1>
-				{/* <form onSubmit={() => userInfo.toggle(!userInfo.isAdmin)}> */}
 				<form onSubmit={login}>
 					<div>
 						<label>Username</label>
@@ -44,7 +43,7 @@ const LoginPage = () => {
 		);
 	} else {
 		return(
-			<button onClick={() => userInfo.toggle(!userInfo.isAdmin)}>Toggle</button>
+			<button onClick={() => userInfo.setToken({token: "nottesttoken"})}>Toggle</button>
 		);
 	}
 }
