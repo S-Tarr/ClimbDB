@@ -8,7 +8,10 @@ const Product = db.define('Climber',{
 	name:{
 		type: DataTypes.STRING
 	}, 
-	weight:{
+	height:{
+		type: DataTypes.INTEGER
+	},
+	age:{
 		type: DataTypes.INTEGER
 	},
 	hometown:{
