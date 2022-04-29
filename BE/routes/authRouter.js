@@ -2,13 +2,11 @@ import express from "express";
 
 import {
     generateToken,
-    validateToken,
-    verifyLogin
+    validateToken
 } from "../controllers/AuthController.js";
 
 const router = express.Router();
 
-router.post("/", verifyLogin);
 router.post("/gettoken", generateToken);
 router.post("/validate", validateToken);
 
