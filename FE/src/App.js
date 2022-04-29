@@ -9,9 +9,9 @@ import EventList from "./components/WCCList";
 import RankList from "./components/RankList";
 import LoginPage from "./components/LoginPage";
 import useToken from "./token.js";
+import ResultsList from "./components/ResultsList";
 
 export const UserContext = React.createContext();
-import ResultsList from "./components/ResultsList";
 
 function App() {
   const {token, setToken} = useToken();
