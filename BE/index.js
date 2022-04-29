@@ -4,6 +4,8 @@ import db from "./config/database.js";
 import climberRoutes from "./routes/ClimberRouter.js";
 import WCCRoutes from "./routes/WCCRouter.js";
 import rankRoutes from "./routes/rankRouter.js";
+import resultRoutes from "./routes/ResultsRouter.js";
+
 import cors from "cors";
 
 const app = express();
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use('/events', WCCRoutes);
 app.use('/climbers', climberRoutes);
 app.use('/ranks', rankRoutes);
+app.use('/results', resultRoutes);
 
 
  
