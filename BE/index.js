@@ -6,6 +6,7 @@ import WCCRoutes from "./routes/WCCRouter.js";
 import rankRoutes from "./routes/rankRouter.js";
 import authRouter from "./routes/authRouter.js";
 import resultRoutes from "./routes/ResultsRouter.js";
+import wrRoutes from "./routes/WRRouter.js";
 
 import cors from "cors";
 
@@ -25,6 +26,7 @@ app.use('/climbers', climberRoutes);
 app.use('/ranks', rankRoutes);
 app.use('/auth', authRouter);
 app.use('/results', resultRoutes);
+app.use('/wr', wrRoutes);
 
 
  

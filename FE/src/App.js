@@ -10,7 +10,7 @@ import RankList from "./components/RankList";
 import LoginPage from "./components/LoginPage";
 import useToken from "./token.js";
 import ResultsList from "./components/ResultsList";
-
+import WR from "./components/WR";
 export const UserContext = React.createContext();
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
                 <Route path="/ranks" element={<RankList />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/results" element={<ResultsList />}/>
+                <Route path="/wr" element={<WR />}/>
               </Routes>
             </div>
           </div>
