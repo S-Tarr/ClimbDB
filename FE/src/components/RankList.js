@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import classes from './RankList.module.css'
 var acs = 0;
-
+var year = 2021;
 const RankList = () => {
 	const [ranks, setRank] = useState([]);
 	function compare1( a, b ) {
@@ -14,7 +14,7 @@ const RankList = () => {
 		if ( a.Points > b.Points ){
 		  return -1;
 		}
-		return 0;
+		return 1;
 	  }
 	
 	  function compare2( a, b ) {
@@ -24,22 +24,19 @@ const RankList = () => {
 		if ( a.Points> b.Points ){
 		  return 1;
 		}
-		return 0;
+		return 1;
 	  }
-	  function myFunction(){
-		  
 	
-		getRanks();
-	
-	}
-	function myFunction(){
-		  
+	function myFunction(pyear){
+		if(pyear != year){
+			acs = 2
+		}
 		if(acs == 1 || acs == 0){
 			acs = 2;
 		} else {
 			acs = 1
 		}
-		getRanks();
+		getRanks(pyear);
 	
 	}
 	useEffect(() => {
@@ -48,14 +45,18 @@ const RankList = () => {
 	}, []);
  
 	const getRanks = async (SYear) => {
+		year = SYear
+		
 		const response = await axios.get(`http://localhost:4000/ranks/${SYear}`);
 		
 		if(acs == 1){
 			response.data.sort(compare1);
 			setRank(response.data);
+			
 		} else if(acs == 2) {
 			response.data.sort(compare2);
 			setRank(response.data);
+			
 
 		} else {
 			setRank(response.data);
@@ -68,27 +69,24 @@ const RankList = () => {
     }
    
 	
-    
+    // getRanks();
     
 	return (
 
 		<div>
 			
-			<select name="selectList" id="selectList">
-				<option value="2017" onClick={ () => getRanks(2017)}>2017</option>
-				<option value="2018" onClick={ () => getRanks(2018)}>2018</option>
-				<option value="2019" onClick={ () => getRanks(2019)}>2019</option>
-				<option value="2021" onClick={ () => getRanks(2021)}>2021</option>
-				
-			  	
-			</select>
+			<button onClick={ () => myFunction(2017)}>2017</button>
+			<button onClick={ () => myFunction(2018)}>2018</button>
+			<button onClick={ () => myFunction(2019)}>2019</button>
+			<button onClick={ () => myFunction(2021)}>2021</button>
+			
 			<table className={classes.maintable}>
 				<thead>
 					<tr>
 						
-					<th onClick={ () => myFunction() } >Ranking</th>
+					<th onClick={ () => myFunction(year) } >Ranking</th>
 						<th>Climber Name</th>
-						<th onClick={ () => myFunction() }># Points</th>
+						<th onClick={ () => myFunction(year) }># Points</th>
 						
 						
 					</tr>
