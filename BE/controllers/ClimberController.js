@@ -25,7 +25,6 @@ export const getClimberById = async (req, res) => {
  
 export const createClimber = async (req, res) => {
 	try {
-		// await Climber.create({name: req.body.name, weight: req.body.weight, hometown: req.body.hometown, isMale: req.body.isMale});
 		await Climber.create(req.body);
 		res.json({
 			"message": "Climber Created"
@@ -39,9 +38,7 @@ export const updateClimber = async (req, res) => {
 	try {
 		await Climber.update({
 			name: req.body.name,
-			weight: req.body.weight,
-			hometown: req.body.hometown,
-			isMale: req.body.isMale
+			hometown: req.body.hometown
 		}, {
 			where: {
 				id: req.params.id

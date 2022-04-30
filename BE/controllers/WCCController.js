@@ -24,8 +24,6 @@ export const getEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
 	try {
-		// await Climber.create({name: req.body.name, weight: req.body.weight, hometown: req.body.hometown, isMale: req.body.isMale});
-		//print(req.body)
 		await WCC.create(req.body);
 		res.json({
 			"message": "Event Created"
@@ -36,7 +34,7 @@ export const createEvent = async (req, res) => {
 }
 export const updateEvent = async (req, res) => {
 	try {
-		await Climber.update({
+		await WCC.update({
 			location: req.body.location,
 			startTime: req.body.startTime,
 			endTime: req.body.endTime
@@ -58,7 +56,7 @@ export const deleteEvent = async (req, res) => {
 	try {
 		await WCC.destroy({
 			where: {
-				id: req.params.id
+				id: Number(req.params.id)
 			}
 		});
 		res.json({

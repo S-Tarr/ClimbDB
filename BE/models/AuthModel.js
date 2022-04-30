@@ -1,5 +1,6 @@
 import db from "../config/database.js";
 import { DataTypes } from "sequelize";
+import 'dotenv/config.js';
 
 const Product = db.define('Admin',{
 	UserName:{
@@ -10,7 +11,7 @@ const Product = db.define('Admin',{
 		type: DataTypes.STRING
 	}
 },{
-	tableName: "Admin",
+	tableName: `${process.env.ADMIN_TABLE}`,
     timestamps: false
 });
 
