@@ -21,7 +21,6 @@ CREATE TABLE Climbers(
     height INT,
     age INT,
     hometown VARCHAR(255),
-    isMale BOOLEAN,
     createdAt DATETIME,
     updatedAt DATETIME
 );
@@ -66,8 +65,8 @@ CREATE TABLE Results(
     EventType VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME,
-    FOREIGN KEY (WCC_ID) REFERENCES Events(id) ,
-    FOREIGN KEY (Climber_ID) REFERENCES Climbers(id)
+    FOREIGN KEY (WCC_ID) REFERENCES Events(id) ON DELETE CASCADE,
+    FOREIGN KEY (Climber_ID) REFERENCES Climbers(id) ON DELETE CASCADE
 );
 ```
 ```SQL
@@ -99,6 +98,7 @@ SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
 EVENT_TABLE = 'Events'
 RANK_TABLE = 'Ranks'
+ADMIN_TABLE = 'Admin'
 JWT_SECRET_KEY = 'whateveryouwant'
 ```
 
