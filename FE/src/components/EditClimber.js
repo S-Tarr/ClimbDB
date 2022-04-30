@@ -18,7 +18,7 @@ const EditClimber = () => {
 			name: name,
 			hometown: hometown
 		});
-		history("/");
+		history("/climbers");
 	}
  
 	useEffect(() => {

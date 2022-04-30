@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { UserContext } from '../App';
 import { useContext } from 'react';
-import LoginPage from './LoginPage';
  
 const ClimberList = () => {
 	const userInfo = useContext(UserContext);
