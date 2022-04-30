@@ -51,7 +51,7 @@ CREATE TABLE Ranks(
 CREATE TABLE Admin (
     UserName VARCHAR(255) PRIMARY KEY,
     Password VARCHAR(255)
- );
+);
  ```
  ```SQL
 CREATE TABLE Results(
