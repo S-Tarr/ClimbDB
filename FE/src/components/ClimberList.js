@@ -44,7 +44,7 @@ const ClimberList = () => {
 							<td>{climber.name}</td>
 							<td>{climber.hometown}</td>
 							{userInfo.valid ? <td>
-								<Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null
+								<Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link>
 								<button onClick={() => deleteClimber(climber.id)} className="button is-small is-danger">Delete</button>
 							</td> : null}
 						</tr>
