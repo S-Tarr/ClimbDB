@@ -44,9 +44,9 @@ const EventList = () => {
 							<td>{ event.location }</td>
 							<td>{ event.eventTime }</td>
 							
-							<td>
-								{userInfo.valid ? <button onClick={ () => deleteEvent(event.id) } className="button is-small is-danger">Delete</button> : null}
-							</td>
+							{userInfo.valid ? <td>
+								<button onClick={ () => deleteEvent(event.id) } className="button is-small is-danger">Delete</button>
+							</td> : null }
 							
 						</tr>
 					)) }
