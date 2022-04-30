@@ -39,14 +39,14 @@ const ClimberList = () => {
 				</thead>
 				<tbody>
 					{ climbers.map((climber, index) => (
-						<tr key={ climber.id }>
-							<td>{ climber.id }</td>
-							<td>{ climber.name }</td>
-							<td>{ climber.hometown }</td>
-							{userInfo.valid ? <td> 
-							{userInfo.valid ? <Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
-							{userInfo.valid ? <button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button> : null}
-							</td> : null }
+						<tr key={climber.id}>
+							<td>{climber.id}</td>
+							<td>{climber.name}</td>
+							<td>{climber.hometown}</td>
+							{userInfo.valid ? <td>
+								<Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link>
+								<button onClick={() => deleteClimber(climber.id)} className="button is-small is-danger">Delete</button>
+							</td> : null}
 						</tr>
 					)) }
 					 

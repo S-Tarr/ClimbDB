@@ -14,12 +14,12 @@ export const getRanks = async (req, res) => {
 		if(req.params.SYear){
 			await sequelize.query('SET @i = ' + req.params.SYear+';');
 			console.log(req.params.SYear)
-		} else {
+	 	} else {
 			await sequelize.query('SET @i = 2021;');
 			console.log("2021")
 		}
 		
-		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id  WHERE Ranks.SYear = @i ORDER BY Ranks.Points DESC LIMIT 50", { type: QueryTypes.SELECT });
+		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id  WHERE Ranks.SYear = @i AND EventType = \"Lead\" ORDER BY Ranks.Points DESC LIMIT 50", { type: QueryTypes.SELECT });
 
         
 		res.json(ranks);
