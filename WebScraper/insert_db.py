@@ -2,16 +2,23 @@ import pickle
 import mysql.connector
 from tqdm import tqdm
 
+import os
+from dotenv import load_dotenv
+
+
 from climber import Climber
 from rank import Rank
 from event import Event
 
+load_dotenv()
+
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="root",
-  database="climb",
-  port="3306"
+  host=os.getenv('HOSTNAME'),
+  user=os.getenv('SQL_USERNAME'),
+  password=os.getenv('SQL_PASSWORD'),
+  database=os.getenv('DATABASE_NAME'),
+  port=os.getenv('SQL_PORT')
+
 )
 
 
@@ -74,7 +81,7 @@ def insert_ranks():
     mydb.commit()
 
 if __name__ == '__main__':
-    #insert_climbers()
-    #insert_events_and_results()
+    insert_climbers()
+    insert_events_and_results()
     insert_ranks()
     mydb.close()
