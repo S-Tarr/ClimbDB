@@ -1,13 +1,19 @@
-import { useContext, useState } from "react"
+import React from "react";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { UserContext } from "../App";
 
 const LoginButton = () => {
 	const userInfo = useContext(UserContext);
-	if(userInfo.valid) {
+	if(!userInfo.valid) {
 		return(
-			<div>
-				<a><Link to="login">{userInfo.}</Link></a>
-			</div>
+			<a><Link to="login">Login</Link></a>
 		);
+	} else {
+		return(
+			<a><Link to="login">{userInfo.username}</Link></a>
+		)
 	}
 }
+
+export default LoginButton;

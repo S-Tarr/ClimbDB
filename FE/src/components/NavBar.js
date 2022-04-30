@@ -1,5 +1,6 @@
 import React from 'react';
 import {  Link } from "react-router-dom";
+import LoginButton from "./LoginButton.js";
 
 import classes from './NavBar.module.css'
 const NavBar= () =>{
@@ -29,10 +30,7 @@ const NavBar= () =>{
     </ul>
 
 </div>
-
-<div className={classes.right}>
-    <a><Link to="login">Login</Link></a>
-    </div>
+<div className={classes.right}><LoginButton /></div>
 
 
 </header>
