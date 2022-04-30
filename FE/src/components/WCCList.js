@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { UserContext } from '../App';
+import { useContext } from 'react';
  
 const EventList = () => {
+	const userInfo = useContext(UserContext);
 	const [events, setEvent] = useState([]);
  
 	useEffect(() => {
@@ -30,7 +33,7 @@ const EventList = () => {
 						<th>Location</th>
 						<th>Time</th>
 						
-						<th>Actions</th>
+						{userInfo.valid ? <th>Actions</th> : null}
 						
 					</tr>
 				</thead>
@@ -42,7 +45,7 @@ const EventList = () => {
 							<td>{ event.eventTime }</td>
 							
 							<td>
-								<button onClick={ () => deleteEvent(event.id) } className="button is-small is-danger">Delete</button>
+								{userInfo.valid ? <button onClick={ () => deleteEvent(event.id) } className="button is-small is-danger">Delete</button> : null}
 							</td>
 							
 						</tr>
