@@ -7,12 +7,12 @@ const NavBar= () =>{
   return (
     <header>
     <div className={classes.title}>
-        <a> <Link to="/main">Climb DB</Link></a>
+        <a> <Link to="/">Climb DB</Link></a>
     </div>
 <div className={classes.mid}>
     <ul className = {classes.nav}>
          <li>
-            <Link to="/#">Climbers</Link>
+            <Link to="/climbers">Climbers</Link>
         </li>
         <li>
             <Link to="/events">Events</Link>

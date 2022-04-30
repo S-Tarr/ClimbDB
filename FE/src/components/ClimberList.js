@@ -26,7 +26,7 @@ const ClimberList = () => {
  
 	return (
 		<div>
-			{userInfo.valid ? <Link to="/add" className="button is-primary mt-2">Add New</Link> : null}
+			{userInfo.valid ? <Link to="/climbers/add" className="button is-primary mt-2">Add New</Link> : null}
 			<table className="table is-striped is-fullwidth">
 				<thead>
 					<tr>
@@ -47,7 +47,7 @@ const ClimberList = () => {
 							<td>{ climber.hometown }</td>
 							<td>{ (climber.isMale ? "Male" : "Female") }</td>
 							<td>
-								{userInfo.valid ? <Link to={`/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
+								{userInfo.valid ? <Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
 								{userInfo.valid ? <button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button> : null}
 							</td>
 						</tr>

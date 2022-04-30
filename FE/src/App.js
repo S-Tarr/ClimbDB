@@ -24,10 +24,10 @@ function App() {
           <div className="columns">
             <div className="column is-half is-offset-one-quarter">
               <Routes>
-              <Route path="/main" element={<MainPage />}/>
-                <Route exact path="/" element={<ClimberList />}/>
-                <Route path="/add" element={<AddClimber />}/>
-                <Route path="/edit/:id" element={<EditClimber />}/>
+              <Route path="/" element={<MainPage />}/>
+                <Route exact path="/climbers" element={<ClimberList />}/>
+                <Route path="/climbers/add" element={<AddClimber />}/>
+                <Route path="/climbers/edit/:id" element={<EditClimber />}/>
                 <Route path="/events" element={<EventList />}/>
                 <Route path="/ranks" element={<RankList />}/>
                 <Route path="/login" element={<LoginPage />}/>
