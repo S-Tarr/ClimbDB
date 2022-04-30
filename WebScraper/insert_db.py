@@ -81,7 +81,7 @@ def insert_ranks():
     mydb.commit()
 
 if __name__ == '__main__':
-    insert_climbers()
-    insert_events_and_results()
+    #insert_climbers()
+    #insert_events_and_results()
     insert_ranks()
     mydb.close()
