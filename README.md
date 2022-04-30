@@ -21,7 +21,6 @@ CREATE TABLE Climbers(
     height INT,
     age INT,
     hometown VARCHAR(255),
-    isMale BOOLEAN,
     createdAt DATETIME,
     updatedAt DATETIME
 );

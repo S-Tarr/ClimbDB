@@ -17,9 +17,6 @@ const Product = db.define('Climber',{
 	hometown:{
 		type: DataTypes.STRING
 	},
-	isMale:{
-		type: DataTypes.BOOLEAN
-	}
 },{
 	tableName: `${process.env.CLIMBER_TABLE}`
 });

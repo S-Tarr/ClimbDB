@@ -8,22 +8,14 @@ import LoginPage from './LoginPage';
 const AddClimber = () => {
 	const userInfo = useContext(UserContext);
 	const [name, setName] = useState('');
-	const [weight, setWeight] = useState(0);
 	const [hometown, setHometown] = useState('');
-	const [isMale, setGender] = useState(0);
 	const history = useNavigate();
  
 	const saveClimber = async (e) => {
 		e.preventDefault();
-		console.log(name);
-		console.log(weight);
-		console.log(hometown);
-		console.log(isMale);
 		await axios.post('http://localhost:4000/climbers',{
 			name: name,
-			weight: weight,
 			hometown: hometown,
-			isMale: isMale
 		});
 		history("/");
 	}
@@ -43,14 +35,6 @@ const AddClimber = () => {
 						/>
 					</div>
 					<div>
-						<label>Weight</label>
-						<input
-							type="number"
-							placeholder="0"
-							onChange={ (e) => setWeight(e.target.value) }
-						/>
-					</div>
-					<div>
 						<label>Hometown</label>
 						<input
 							type="text"
@@ -58,15 +42,6 @@ const AddClimber = () => {
 							onChange={ (e) => setHometown(e.target.value) }
 						/>
 					</div>
-					<div>
-						<label>Gender</label>
-						<select name="gender_dropdown" onChange={ (e) => setGender(e.target.value)}>
-							<option value="" disabled selected>Select gender</option>
-							<option value="1">Male</option>
-							<option value="0">Female</option>
-						</select>
-					</div>
-	
 					<div className="field">
 						<button className="button is-primary">Save</button>
 					</div>
@@ -80,4 +55,4 @@ const AddClimber = () => {
 	}
 }
  
-export default AddClimber
+export default AddClimber;

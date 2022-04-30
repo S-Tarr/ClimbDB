@@ -24,8 +24,6 @@ export const getEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
 	try {
-		// await Climber.create({name: req.body.name, weight: req.body.weight, hometown: req.body.hometown, isMale: req.body.isMale});
-		//print(req.body)
 		await WCC.create(req.body);
 		res.json({
 			"message": "Event Created"
