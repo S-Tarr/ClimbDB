@@ -5,7 +5,7 @@ const sequelize = new Sequelize('climb', 'root', 'root', {
     host: 'localhost',
     dialect:'mysql',
 	port: process.env.SQL_PORT
-  });
+});
 export const getWR= async (req, res) => {
     
     

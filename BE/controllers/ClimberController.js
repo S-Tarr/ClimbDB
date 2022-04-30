@@ -1,4 +1,6 @@
 import Climber from "../models/ClimberModel.js";
+import db from "../config/database.js";
+import { QueryTypes } from "sequelize";
  
 export const getAllClimbers = async (req, res) => {
 	try {
@@ -25,11 +27,17 @@ export const getClimberById = async (req, res) => {
  
 export const createClimber = async (req, res) => {
 	try {
-		await Climber.create(req.body);
+		const max = await db.query(`SELECT MAX(id) as max FROM ${process.env.CLIMBER_TABLE}`, { type: QueryTypes.SELECT });
+		await Climber.create({
+			id: max[0].max+1,
+			name: req.body.name,
+			hometown: req.body.hometown
+		});
 		res.json({
 			"message": "Climber Created"
 		});
 	} catch (error) {
+		console.log(error.message);
 		res.json({ message: error.message });
 	}  
 }
