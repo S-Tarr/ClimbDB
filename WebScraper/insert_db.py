@@ -45,8 +45,8 @@ def insert_events_and_results():
 
     for bailey_event in tqdm(baileys):
 
-        sql = "INSERT IGNORE INTO Events (id, eventTime) VALUES (%s, %s)"
-        val = (bailey_event.event_id, bailey_event.date)
+        sql = "INSERT IGNORE INTO Events (id, location, eventTime) VALUES (%s, %s, %s)"
+        val = (bailey_event.event_id, bailey_event.location, bailey_event.date)
         mycursor.execute(sql, val)
         
         rank = 1
@@ -75,7 +75,7 @@ def insert_ranks():
     for ranks in tqdm(rankings):
         for rank in ranks:
             sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, SYear) VALUES (%s, %s, %s, %s, %s)"
-            val = (rank.rank, rank.id, rank.points, rank.event_type, rank.year)
+            val = (rank.climber_rank, rank.id, rank.points, rank.event_type, rank.year)
             mycursor.execute(sql, val)
     
     mydb.commit()

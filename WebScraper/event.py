@@ -8,6 +8,7 @@ class Event:
     event_id: int
     result_id: int
     event_type: str
+    location: str
     date: datetime | None = None
     results: list[tuple[str, ...]] | None = None
 
