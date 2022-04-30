@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { UserContext } from '../App';
+import { useContext } from 'react';
+import LoginPage from './LoginPage';
  
 const ClimberList = () => {
+	const userInfo = useContext(UserContext);
 	const [climbers, setClimber] = useState([]);
  
 	useEffect(() => {
@@ -22,7 +26,7 @@ const ClimberList = () => {
  
 	return (
 		<div>
-			<Link to="/add" className="button is-primary mt-2">Add New</Link>
+			{userInfo.valid ? <Link to="/add" className="button is-primary mt-2">Add New</Link> : null}
 			<table className="table is-striped is-fullwidth">
 				<thead>
 					<tr>
@@ -31,7 +35,7 @@ const ClimberList = () => {
 						<th>Weight</th>
 						<th>Hometown</th>
 						<th>Gender</th>
-						<th>Actions</th>
+						{userInfo.valid ? <th>Actions</th> : null}
 					</tr>
 				</thead>
 				<tbody>
@@ -43,8 +47,8 @@ const ClimberList = () => {
 							<td>{ climber.hometown }</td>
 							<td>{ (climber.isMale ? "Male" : "Female") }</td>
 							<td>
-								<Link to={`/edit/${climber.id}`} className="button is-small is-info">Edit</Link>
-								<button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button>
+								{userInfo.valid ? <Link to={`/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
+								{userInfo.valid ? <button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button> : null}
 							</td>
 						</tr>
 					)) }
