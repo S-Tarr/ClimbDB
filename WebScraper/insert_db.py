@@ -9,9 +9,9 @@ from event import Event
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="helloworld",
-  database="testapp",
-  port="3308"
+  password="root",
+  database="climb",
+  port="3307"
 )
 
 
