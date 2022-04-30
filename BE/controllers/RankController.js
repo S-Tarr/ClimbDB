@@ -2,9 +2,9 @@ import Ranks from "../models/RankModel.js";
 import Climbers from "../models/ClimberModel.js";
 import { Sequelize, QueryTypes } from "sequelize";
 const sequelize = new Sequelize('climb', 'root', 'root', {
-    host: 'localhost',
-    dialect:'mysql',
-	port: 3307
+    host: `${process.env.HOSTNAME}`,
+    dialect: "mysql",
+    port: `${process.env.SQL_PORT}`
   });
 export const getRanks = async (req, res) => {
     Climbers.hasOne(Ranks, {foreignKey:'ClimberID'});
