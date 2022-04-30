@@ -39,9 +39,11 @@ CREATE TABLE Events(
 ```SQL
 CREATE TABLE Ranks(
     id INT PRIMARY KEY AUTO_INCREMENT, 
-    Name VARCHAR(255),
+    ClimberRank INT,
     ClimberID INT, 
-    Points FLOAT(6, 2), 
+    Points FLOAT(6, 2),
+    EventType VARCHAR (255), 
+    SYear INT,
     createdAt DATETIME, 
     updatedAt DATETIME
 );
@@ -75,7 +77,7 @@ CREATE TABLE Records(
     date  DATETIME,
     eventName VARCHAR(255),
     eventID INT,
-    RecordTime INTc
+    RecordTime INT,
     createdAt DATETIME,
     updatedAt DATETIME
 );

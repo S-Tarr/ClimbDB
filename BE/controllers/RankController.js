@@ -11,7 +11,7 @@ export const getRanks= async (req, res) => {
     Ranks.belongsTo(Climbers);
     
 	try {
-		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id ORDER BY Ranks.Points DESC LIMIT 50", { type: QueryTypes.SELECT });
+		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id WHERE Ranks.SYear = 2021 ORDER BY Ranks.Points DESC LIMIT 50", { type: QueryTypes.SELECT });
 
         
 		res.json(ranks);
