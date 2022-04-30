@@ -10,7 +10,7 @@ const EventList = () => {
  
 	useEffect(() => {
 		getEvents();
-		console.log(events)
+		// console.log(events)
 	}, []);
  
 	const getEvents = async () => {

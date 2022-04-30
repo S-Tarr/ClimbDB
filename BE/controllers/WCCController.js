@@ -36,7 +36,7 @@ export const createEvent = async (req, res) => {
 }
 export const updateEvent = async (req, res) => {
 	try {
-		await Climber.update({
+		await WCC.update({
 			location: req.body.location,
 			startTime: req.body.startTime,
 			endTime: req.body.endTime
@@ -58,7 +58,7 @@ export const deleteEvent = async (req, res) => {
 	try {
 		await WCC.destroy({
 			where: {
-				id: req.params.id
+				id: Number(req.params.id)
 			}
 		});
 		res.json({

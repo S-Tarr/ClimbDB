@@ -66,8 +66,8 @@ CREATE TABLE Results(
     EventType VARCHAR(255),
     createdAt DATETIME,
     updatedAt DATETIME,
-    FOREIGN KEY (WCC_ID) REFERENCES Events(id) ,
-    FOREIGN KEY (Climber_ID) REFERENCES Climbers(id)
+    FOREIGN KEY (WCC_ID) REFERENCES Events(id) ON DELETE CASCADE,
+    FOREIGN KEY (Climber_ID) REFERENCES Climbers(id) ON DELETE CASCADE
 );
 ```
 ```SQL
