@@ -11,7 +11,7 @@ mydb = mysql.connector.connect(
   user="root",
   password="root",
   database="climb",
-  port="3307"
+  port="3306"
 )
 
 
@@ -67,14 +67,14 @@ def insert_ranks():
 
     for ranks in tqdm(rankings):
         for rank in ranks:
-            sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, Year) VALUES (%s, %s, %s, %s, %s)"
+            sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, SYear) VALUES (%s, %s, %s, %s, %s)"
             val = (rank.rank, rank.id, rank.points, rank.event_type, rank.year)
             mycursor.execute(sql, val)
     
     mydb.commit()
 
 if __name__ == '__main__':
-    insert_climbers()
-    insert_events_and_results()
+    #insert_climbers()
+    #insert_events_and_results()
     insert_ranks()
     mydb.close()
