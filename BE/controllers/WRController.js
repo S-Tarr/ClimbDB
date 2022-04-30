@@ -1,8 +1,8 @@
 import "dotenv/config.js";
 
 import { Sequelize, QueryTypes } from "sequelize";
-const sequelize = new Sequelize('climb', 'root', 'root', {
-    host: 'localhost',
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.SQL_USERNAME, process.env.SQL_PASSWORD, {
+    host: process.env.HOSTNAME,
     dialect:'mysql',
 	port: process.env.SQL_PORT
   });
