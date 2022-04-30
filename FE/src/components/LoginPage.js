@@ -7,7 +7,6 @@ const LoginPage = () => {
 	const userInfo = useContext(UserContext);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [valid, setValid] = useState(false);
 
 	const login = async (e) => {
 		e.preventDefault();
@@ -15,22 +14,13 @@ const LoginPage = () => {
 			username: username,
 			password: password
 		});
-		userInfo.setToken({token: response.data.token});
-	}
-
-	// tkn is a *string* for the token (not json)
-	const validate = async (tkn) => {
-		const response = await axios.post("http://localhost:4000/auth/validate", {
-			token: tkn
+		userInfo.setToken({
+			token: response.data.token,
+			username: response.data.username
 		});
-		setValid(response.data);
 	}
 
-	useEffect(() => {
-		validate(userInfo.token);
-	}, [userInfo.token]);
-
-	if(!valid) {
+	if(!userInfo.valid) {
 		return(
 			<div>
 				<h1>Enter Login Information</h1>
@@ -56,7 +46,7 @@ const LoginPage = () => {
 		);
 	} else {
 		return(
-			<button onClick={() => userInfo.setToken({token: "nottesttoken"})}>Logout</button>
+			<button onClick={() => userInfo.setToken({username: "", token: "nottesttoken"})}>Logout</button>
 		);
 	}
 }

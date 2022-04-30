@@ -1,17 +1,18 @@
 import React from 'react';
 import {  Link } from "react-router-dom";
+import LoginButton from "./LoginButton.js";
 
 import classes from './NavBar.module.css'
 const NavBar= () =>{
   return (
     <header>
     <div className={classes.title}>
-        <a> <Link to="/main">Climb DB</Link></a>
+        <a> <Link to="/">Climb DB</Link></a>
     </div>
 <div className={classes.mid}>
     <ul className = {classes.nav}>
          <li>
-            <Link to="/#">Climbers</Link>
+            <Link to="/climbers">Climbers</Link>
         </li>
         <li>
             <Link to="/events">Events</Link>
@@ -29,10 +30,7 @@ const NavBar= () =>{
     </ul>
 
 </div>
-
-<div className={classes.right}>
-    <a><Link to="login">Login</Link></a>
-    </div>
+<div className={classes.right}><LoginButton /></div>
 
 
 </header>
