@@ -26,8 +26,13 @@ const RankList = () => {
 		}
 		return 0;
 	  }
-	
 	  function myFunction(){
+		  
+	
+		getRanks();
+	
+	}
+	function myFunction(){
 		  
 		if(acs == 1 || acs == 0){
 			acs = 2;
@@ -36,14 +41,14 @@ const RankList = () => {
 		}
 		getRanks();
 	
-	  }
+	}
 	useEffect(() => {
-		getRanks();
+		getRanks(2021);
 		console.log(ranks)
 	}, []);
  
-	const getRanks = async () => {
-		const response = await axios.get(`http://localhost:4000/ranks`);
+	const getRanks = async (SYear) => {
+		const response = await axios.get(`http://localhost:4000/ranks/${SYear}`);
 		
 		if(acs == 1){
 			response.data.sort(compare1);
@@ -54,7 +59,9 @@ const RankList = () => {
 
 		} else {
 			setRank(response.data);
+
 		}
+		console.log(response.data)
 		
 		
 		
@@ -64,9 +71,17 @@ const RankList = () => {
     
     
 	return (
+
 		<div>
 			
-			
+			<select name="selectList" id="selectList">
+				<option value="2017" onClick={ () => getRanks(2017)}>2017</option>
+				<option value="2018" onClick={ () => getRanks(2018)}>2018</option>
+				<option value="2019" onClick={ () => getRanks(2019)}>2019</option>
+				<option value="2021" onClick={ () => getRanks(2021)}>2021</option>
+				
+			  	
+			</select>
 			<table className={classes.maintable}>
 				<thead>
 					<tr>

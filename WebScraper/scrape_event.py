@@ -86,7 +86,11 @@ def competitor_competitions(driver: webdriver, user_id: int | str) -> list[Event
     for event in tqdm(soup.find_all('div', class_='result')):
         datestr = event.find('div', class_='date').text.strip()
         date = datetime.strptime(datestr, '%A, %d %B %Y')
-
+        location = event.find('div', class_='event').getText().strip().split('-')[-1].split(')')[0].strip()
+        if location.isnumeric():
+            location = event.find('div', class_='event').getText().strip().split('- ')[-2].split(')')[0].strip()
+        location += ')'
+        print(location)
         event_id, result_id = event.find('a')['href'].split('event=')[1].split('&result=')
 
         results = scrape_result(driver, event_id, result_id)
@@ -97,7 +101,7 @@ def competitor_competitions(driver: webdriver, user_id: int | str) -> list[Event
             elif '[' in results[0][1]:
                 event_type = "Lead"
 
-        events.append(Event(event_id, result_id, event_type, date, results))
+        events.append(Event(event_id, result_id, event_type, location, date, results))
         sleep(BETWEEN)
 
     return events
@@ -150,8 +154,8 @@ def scrape_climbers(driver: webdriver) -> list[Climber]:
     return climbers
 
 
-def scrape_rankings(driver: webdriver, year: int, category: int) -> list[Rank]:
-    driver.get(f'https://components.ifsc-climbing.org/ranking-complete/?cup=66&category={category}&year={year}')
+def scrape_rankings(driver: webdriver, year: int, category: int, cup: int) -> list[Rank]:
+    driver.get(f'https://components.ifsc-climbing.org/ranking-complete/?cup={cup}&category={category}&year={year}')
     WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.ID, 'table_id_wrapper')))
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -162,18 +166,20 @@ def scrape_rankings(driver: webdriver, year: int, category: int) -> list[Rank]:
         climber_rank = rank.find('p', class_='rank').getText()
         climber_id = rank.find('a')['href'].split('id=')[1]
         points = rank.find_all('p')[-1].getText()
-        ranks.append(Rank(climber_id, climber_rank, points, event_type[category], year))
+        print(points)
+        ranks.append(Rank(climber_id, climber_rank, points, event_type[category - 1], year))
         sleep(BETWEEN)
 
     return ranks
 
 
 def get_rankings(driver: webdriver):
-    years = [2017, 2018, 2019, 2020, 2021]
+    cup = [59, 61, 63, 66]
+    years = [2017, 2018, 2019, 2021]
     ranks = []
-    for year in years:
-        for category in range(1,3):
-            ranks.append(scrape_rankings(driver, year, category))
+    for i, year in enumerate(years):
+        for category in range(1, 4):
+            ranks.append(scrape_rankings(driver, year, category, cup[i]))
 
     return ranks
 
@@ -188,18 +194,18 @@ if __name__ == '__main__':
         # pickle_out = open("climbers.pickle", "wb")
         # pickle.dump(climbers, pickle_out)
         # pickle_out.close()
-        # baileys = competitor_competitions(chrome_driver, 1741)
-        # pickle_out = open("events.pickle","wb")
-        # pickle.dump(baileys, pickle_out)
-        # pickle_out.close()
+        baileys = competitor_competitions(chrome_driver, 1741)
+        pickle_out = open("events.pickle","wb")
+        pickle.dump(baileys, pickle_out)
+        pickle_out.close()
         # pickle_out = open("climberIDs.pickle", "wb")
         # pickle.dump(climberIDs, pickle_out)
         # pickle_out.close()
 
         # for bailey_event in baileys:
         #     bailey_event.to_csv()
-        ranks = get_rankings(chrome_driver)
-        pickle_out = open("ranks.pickle", "wb")
-        pickle.dump(ranks, pickle_out)
-        pickle_out.close()
+        # ranks = get_rankings(chrome_driver)
+        # pickle_out = open("ranks.pickle", "wb")
+        # pickle.dump(ranks, pickle_out)
+        # pickle_out.close()
     
