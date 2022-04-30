@@ -67,7 +67,7 @@ def insert_ranks():
 
     for ranks in tqdm(rankings):
         for rank in ranks:
-            sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, Year) VALUES (%s, %s, %s, %s, %s)"
+            sql = "INSERT IGNORE INTO Ranks (ClimberRank, ClimberID, Points, EventType, SYear) VALUES (%s, %s, %s, %s, %s)"
             val = (rank.rank, rank.id, rank.points, rank.event_type, rank.year)
             mycursor.execute(sql, val)
     
