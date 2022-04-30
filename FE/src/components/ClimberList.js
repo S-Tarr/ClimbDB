@@ -43,10 +43,10 @@ const ClimberList = () => {
 							<td>{ climber.id }</td>
 							<td>{ climber.name }</td>
 							<td>{ climber.hometown }</td>
-							<td>
-								{userInfo.valid ? <Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
-								{userInfo.valid ? <button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button> : null}
-							</td>
+							{userInfo.valid ? <td> 
+							{userInfo.valid ? <Link to={`/climbers/edit/${climber.id}`} className="button is-small is-info">Edit</Link> : null}
+							{userInfo.valid ? <button onClick={ () => deleteClimber(climber.id) } className="button is-small is-danger">Delete</button> : null}
+							</td> : null }
 						</tr>
 					)) }
 					 
