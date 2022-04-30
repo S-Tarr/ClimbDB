@@ -3,7 +3,8 @@ import Climbers from "../models/ClimberModel.js";
 import { Sequelize, QueryTypes } from "sequelize";
 const sequelize = new Sequelize('climb', 'root', 'root', {
     host: 'localhost',
-    dialect:'mysql'
+    dialect:'mysql',
+	port: 3307
   });
 export const getRanks= async (req, res) => {
     Climbers.hasOne(Ranks, {foreignKey:'ClimberID'});
