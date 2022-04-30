@@ -99,6 +99,7 @@ SQL_PASSWORD = 'root'
 CLIMBER_TABLE = 'Climbers'
 EVENT_TABLE = 'Events'
 RANK_TABLE = 'Ranks'
+ADMIN_TABLE = 'Admin'
 JWT_SECRET_KEY = 'whateveryouwant'
 ```
 
