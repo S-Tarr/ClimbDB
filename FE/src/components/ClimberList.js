@@ -56,4 +56,4 @@ const ClimberList = () => {
 	)
 }
  
-export default ClimberList
+export default ClimberList;
