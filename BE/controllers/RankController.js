@@ -20,7 +20,7 @@ export const getRanks = async (req, res) => {
 			await sequelize.query('SET @i = 2021;');
 			console.log("2021")
 		}
-		if(req.params["Type"]){
+		if(req.params["Type"] == "Boulder"||req.params["Type"] == "Speed"||req.params["Type"] == "Lead"){
 			
 			ctype = req.params["Type"]
 	 	} 
