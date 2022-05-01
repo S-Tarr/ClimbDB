@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import classes from './RankList.module.css'
 var acs = 0;
 var year = 2021;
+var type = ""; 
 const RankList = () => {
 	const [ranks, setRank] = useState([]);
 	function compare1( a, b ) {
@@ -27,8 +28,9 @@ const RankList = () => {
 		return 1;
 	  }
 	
-	function myFunction(pyear){
-		if(pyear != year){
+	function myFunction(pyear, ttype){
+		
+		if(pyear != year||ttype != type){
 			acs = 2
 		}
 		if(acs == 1 || acs == 0){
@@ -36,18 +38,19 @@ const RankList = () => {
 		} else {
 			acs = 1
 		}
-		getRanks(pyear);
+		getRanks(pyear, ttype);
 	
 	}
 	useEffect(() => {
-		getRanks(2021);
+		getRanks(2021, "Speed");
 		console.log(ranks)
 	}, []);
  
-	const getRanks = async (SYear) => {
+	const getRanks = async (SYear, Type) => {
 		year = SYear
+		type = Type
 		
-		const response = await axios.get(`http://localhost:4000/ranks/${SYear}`);
+		const response = await axios.get(`http://localhost:4000/ranks/${SYear}-${Type}`);
 		
 		if(acs == 1){
 			response.data.sort(compare1);
@@ -75,18 +78,45 @@ const RankList = () => {
 
 		<div>
 			
-			<button onClick={ () => myFunction(2017)}>2017</button>
-			<button onClick={ () => myFunction(2018)}>2018</button>
-			<button onClick={ () => myFunction(2019)}>2019</button>
-			<button onClick={ () => myFunction(2021)}>2021</button>
+			<select name="cars" id="cars" onChange={(e) => myFunction(e.target.value.split(",")[0],e.target.value.split(",")[1])}>
+  				<option value = {[2021,"Speed"]}>2021 Speed</option>
+				<option value = {[2021,"Lead"]}>2021 Lead</option>
+				<option value = {[2021,"Boulder"]}>2021 Boulder</option>
+				<option value = {[2019,"Speed"]}>2019 Speed</option>
+				<option value = {[2019,"Lead"]}>2019 Lead</option>
+				<option value = {[2019,"Boulder"]}>2019 Boulder</option>
+  				
+				<option value = {[2018,"Speed"]}>2018 Speed</option>
+				<option value = {[2018,"Lead"]}>2018 Lead</option>
+				<option value = {[2018,"Boulder"]}>2018 Boulder</option>
+  				
+				<option value = {[2017,"Speed"]}>2017 Speed</option>
+				<option value = {[2017,"Lead"]}>2017 Lead</option>
+				<option value = {[2017,"Boulder"]}>2017 Boulder</option>
+  				
+  				
+			</select>
+			
+			{/* <button onClick={ () => myFunction(2017, "Lead")}>2017</button>
+			<button onClick={ () => myFunction(2018, "Lead")}>2018</button>
+			<button onClick={ () => myFunction(2019, "Lead")}>2019</button>
+			<button onClick={ () => myFunction(2021, "Lead")}>2021</button>
+			<button onClick={ () => myFunction(2017, "Speed")}>2017</button>
+			<button onClick={ () => myFunction(2018, "Speed")}>2018</button>
+			<button onClick={ () => myFunction(2019, "Speed")}>2019</button>
+			<button onClick={ () => myFunction(2021, "Speed")}>2021</button>
+			<button onClick={ () => myFunction(2017, "Boulder")}>2017</button>
+			<button onClick={ () => myFunction(2018, "Boulder")}>2018</button>
+			<button onClick={ () => myFunction(2019, "Boulder")}>2019</button>
+			<button onClick={ () => myFunction(2021, "Boulder")}>2021</button> */}
 			
 			<table className={classes.maintable}>
 				<thead>
 					<tr>
 						
-					<th onClick={ () => myFunction(year) } >Ranking</th>
+					<th onClick={ () => myFunction(year, type) } >Ranking</th>
 						<th>Climber Name</th>
-						<th onClick={ () => myFunction(year) }># Points</th>
+						<th onClick={ () => myFunction(year, type) }># Points</th>
 						
 						
 					</tr>
@@ -94,7 +124,7 @@ const RankList = () => {
 				<tbody>
 					{ ranks.map((rank, index) => (
 						<tr key={ rank.id }>
-							<td>{ acs < 2 ? index+1 : 50-index}</td>
+							<td>{ acs < 2 ? index+1 : ranks.length-index}</td>
                            
                             
                             
