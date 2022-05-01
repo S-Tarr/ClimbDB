@@ -7,7 +7,7 @@ import {
  
 const router = express.Router();
  
-router.get('/:SYear', getRanks);
+router.get('/:SYear-:Type', getRanks);
 router.get('/', getRanks);
  
 export default router;
