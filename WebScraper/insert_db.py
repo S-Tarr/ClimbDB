@@ -31,6 +31,9 @@ def insert_climbers():
         sql = "INSERT IGNORE INTO Climbers (id, name, height, age, hometown) VALUES (%s, %s, %s, %s, %s)"
         val = (climber.id, climber.name.strip(), climber.height, climber.age, climber.hometown.strip())
         mycursor.execute(sql, val)
+        sql = "INSERT IGNORE INTO Ratings (Climber_ID, Rating) VALUES (%s, %s)"
+        val = (climber.id, 1500)
+        mycursor.execute(sql, val)
     
     mydb.commit()
     
@@ -40,8 +43,6 @@ def insert_events_and_results():
     baileys = pickle.load(pickle_in)
     mycursor = mydb.cursor()
     
-    insert_climbers()
-
     for bailey_event in tqdm(baileys):
 
         sql = "INSERT IGNORE INTO Events (id, location, eventTime) VALUES (%s, %s, %s)"
@@ -80,7 +81,7 @@ def insert_ranks():
     mydb.commit()
 
 if __name__ == '__main__':
-    #insert_climbers()
+    insert_climbers()
     #insert_events_and_results()
-    insert_ranks()
+    # insert_ranks()
     mydb.close()
