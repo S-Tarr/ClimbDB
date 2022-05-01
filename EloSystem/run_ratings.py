@@ -24,21 +24,8 @@ mydb = mysql.connector.connect(
 )
 
 def evaluate_comp(comp_id: int, event_type: str):
-    # sql_select_Query = "select * from Laptop"
-    # cursor = connection.cursor()
-    # cursor.execute(sql_select_Query)
-    # # get all records
-    # records = cursor.fetchall()
-    # print("Total number of rows in table: ", cursor.rowcount)
 
-    # print("\nPrinting each row")
-    # for row in records:
-    #     print("Id = ", row[0], )
-    #     print("Name = ", row[1])
-    #     print("Price  = ", row[2])
-    #     print("Purchase date  = ", row[3], "\n")
-
-    select_results = f"select Climber_ID, Qualification, SemiFinal, Final from Results where WCC_ID=\"{comp_id}\" and EventType=\"{event_type}\""
+    select_results = f"select Climber_ID, ClimberRank, Qualification, SemiFinal, Final from Results where WCC_ID=\"{comp_id}\" and EventType=\"{event_type}\""
 
     cursor = mydb.cursor()
     cursor.execute(select_results)
@@ -47,15 +34,41 @@ def evaluate_comp(comp_id: int, event_type: str):
 
     num_competitors = len(results)
     for result in results:
-        # print("Climber_ID: " + str(result[0]))
-        select_rating = f"select Rating from Ratings where Climber_ID={results[0][0]}"
+        climber_ID = result[0]
+        ranked = result[1]
+
+        select_rating = f"select Rating from Ratings where Climber_ID={climber_ID}"
+        cursor.execute(select_rating)
         query_rating = cursor.fetchone()
-        # rating = query_rating[0]
-        print(query_rating)
-        # print(rating)
-        # new_rating = update_multiple()
+        rating = query_rating[0]
+        print("Ranked: " + str(ranked))
+        new_rating = update_multiple(rating, num_competitors, ranked)
+        print("Updated Rating: " + str(new_rating))
+        update_rating = f"update Ratings set Rating={new_rating} where Climber_ID={climber_ID}"
+        cursor.execute(update_rating)
+    
+    mydb.commit()
+
+
+def run_comps():
+    # get list of each event
+    select_events = "select id, eventTime from Events"
+    cursor = mydb.cursor()
+    cursor.execute(select_events)
+
+    events = cursor.fetchall()
+    
+    for event in events:
+        comp_id = event[0]
+        year = int(str(event[1]).split('-')[0])
+        print(year)
+        if (year > 2014):
+            evaluate_comp(comp_id, "Boulder") 
+
+    mydb.commit()
+        
         
 
-
 if __name__ == '__main__':
-    evaluate_comp(1233, 'Boulder')
+    # evaluate_comp(1233, 'Boulder')
+    run_comps()
