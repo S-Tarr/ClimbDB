@@ -24,6 +24,7 @@ CREATE TABLE Climbers(
     createdAt DATETIME,
     updatedAt DATETIME
 );
+CREATE INDEX c_id ON Climbers(id) USING HASH; 
 ```
 
 ```SQL
