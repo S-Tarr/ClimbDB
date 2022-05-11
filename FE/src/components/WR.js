@@ -30,7 +30,7 @@ const WRList = () => {
 	return (
 		<div>
 			
-			<center>WORLD RECORDS </center>
+			<center>WORLD RECORD </center>
 			<table className={classes.maintable}>
 				<thead>
 					<tr>

@@ -24,6 +24,7 @@ CREATE TABLE Climbers(
     createdAt DATETIME,
     updatedAt DATETIME
 );
+CREATE INDEX c_id ON Climbers(id) USING HASH; 
 ```
 
 ```SQL
@@ -34,6 +35,7 @@ CREATE TABLE Events(
     createdAt DATETIME,
     updatedAt DATETIME
 );
+CREATE INDEX event_id ON Events(id) USING HASH;
 ```
 ```SQL
 CREATE TABLE Ranks(
@@ -46,12 +48,14 @@ CREATE TABLE Ranks(
     createdAt DATETIME, 
     updatedAt DATETIME
 );
+CREATE INDEX rank_type ON Ranks(EventType, SYear) USING BTREE;
 ```
 ```SQL
 CREATE TABLE Admin (
     UserName VARCHAR(255) PRIMARY KEY,
     Password VARCHAR(255)
- );
+);
+CREATE INDEX admin_id ON Admin(UserName) USING HASH;
  ```
  ```SQL
 CREATE TABLE Results(
@@ -68,6 +72,7 @@ CREATE TABLE Results(
     FOREIGN KEY (WCC_ID) REFERENCES Events(id) ON DELETE CASCADE,
     FOREIGN KEY (Climber_ID) REFERENCES Climbers(id) ON DELETE CASCADE
 );
+CREATE INDEX result_time ON Results(Final, SemiFinal) USING BTREE; 
 ```
 ```SQL
 CREATE TABLE Records(
@@ -80,6 +85,7 @@ CREATE TABLE Records(
     createdAt DATETIME,
     updatedAt DATETIME
 );
+CREATE INDEX record_id ON Records(id) USING HASH;
 ```
 
 

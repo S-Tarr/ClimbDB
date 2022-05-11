@@ -17,7 +17,7 @@ const AddClimber = () => {
 			name: name,
 			hometown: hometown,
 		});
-		history("/");
+		history("/climbers");
 	}
  
 	if(userInfo.valid) {

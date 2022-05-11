@@ -82,6 +82,6 @@ def insert_ranks():
 
 if __name__ == '__main__':
     insert_climbers()
-    #insert_events_and_results()
-    # insert_ranks()
+    insert_events_and_results()
+    insert_ranks()
     mydb.close()

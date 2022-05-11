@@ -11,15 +11,21 @@ export const getRanks = async (req, res) => {
     Ranks.belongsTo(Climbers);
     
 	try {
-		if(req.params.SYear){
+		console.log("2021")
+		var ctype = "Lead";
+		if(req.params["SYear"]){
 			await sequelize.query('SET @i = ' + req.params.SYear+';');
-			console.log(req.params.SYear)
+			console.log(req.params["SYear"])
 	 	} else {
 			await sequelize.query('SET @i = 2021;');
 			console.log("2021")
 		}
+		if(req.params["Type"] == "Boulder"||req.params["Type"] == "Speed"||req.params["Type"] == "Lead"){
+			
+			ctype = req.params["Type"]
+	 	} 
 		
-		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id  WHERE Ranks.SYear = @i AND EventType = \"Lead\" ORDER BY Ranks.Points DESC LIMIT 50", { type: QueryTypes.SELECT });
+		const ranks = await sequelize.query("SELECT Climbers.id, Climbers.name, Ranks.Points FROM `Ranks` JOIN `Climbers` ON Ranks.ClimberID = Climbers.id  WHERE Ranks.SYear = @i AND Ranks.EventType = \"" + ctype+ "\" ORDER BY Ranks.Points DESC", { type: QueryTypes.SELECT });
 
         
 		res.json(ranks);

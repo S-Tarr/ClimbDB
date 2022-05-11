@@ -27,7 +27,7 @@ const ClimberList = () => {
  
 	return (
 		<div>
-			{/* {userInfo.valid ? <Link to="/climbers/add" className="button is-primary mt-2">Add New</Link> : null} */}
+			{userInfo.valid ? <Link to="/climbers/add" className="button is-primary mt-2">Add New</Link> : null}
 			<table className="table">
 				<thead>
 					<tr>
@@ -56,4 +56,4 @@ const ClimberList = () => {
 	)
 }
  
-export default ClimberList
+export default ClimberList;
