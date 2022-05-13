@@ -1,7 +1,10 @@
+from os import read
 import unicodedata
 from datetime import datetime
 from time import sleep
 from typing import Iterable
+
+import concurrent.futures
 
 import pickle
 
@@ -16,6 +19,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
+
 from tqdm import tqdm
 
 from event import Event
@@ -90,7 +95,6 @@ def competitor_competitions(driver: webdriver, user_id: int | str) -> list[Event
         if location.isnumeric():
             location = event.find('div', class_='event').getText().strip().split('- ')[-2].split(')')[0].strip()
         location += ')'
-        print(location)
         event_id, result_id = event.find('a')['href'].split('event=')[1].split('&result=')
 
         results = scrape_result(driver, event_id, result_id)
@@ -184,6 +188,55 @@ def get_rankings(driver: webdriver):
     return ranks
 
 
+def scrape_event(driver: webdriver, event_id: int, type: int):
+    types = ["", "Lead", "Speed", "Boulder"]
+    events = []
+    
+    driver.get(f'https://components.ifsc-climbing.org/result-complete/?event={event_id}&result={type}')
+    try:
+        WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.ID, 'table_id_wrapper')))
+        html = driver.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+
+
+        # datestr = soup.find('div', class_='date').text.strip()
+        # date = datetime.strptime(datestr, '%A, %d %B %Y')
+        date = 0
+        location = soup.find('h1', class_='event_title').getText().strip().split('-')[-1].split(')')[0].strip()
+        if location.isnumeric():
+            location = soup.find('h1', class_='event_title').getText().strip().split('- ')[-2].split(')')[0].strip()
+        location += ')'
+        # _, result_id = soup.find('a')['href'].split('event=')[1].split('&result=')
+
+        results = parse_results(html)
+        events.append(Event(event_id, 0, types[type], location, date, results))
+
+    except TimeoutException: 
+        pass
+
+
+def iterate_events(event_range, type: int):
+    # event range 468-1235
+
+    events = []
+    drivers = [setup_fx_driver() for _ in range(30)]
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
+        future = executor.map(scrape_event, drivers, event_range, type)
+        events = future.result()
+        print(events)
+    
+    return events
+
+
+def setup_driver() -> webdriver:
+    options = Options()
+    options.add_argument('--headless')
+
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    return driver
+
+
 if __name__ == '__main__':
     options = Options()
     options.add_argument('--headless')
@@ -194,10 +247,10 @@ if __name__ == '__main__':
         # pickle_out = open("climbers.pickle", "wb")
         # pickle.dump(climbers, pickle_out)
         # pickle_out.close()
-        baileys = competitor_competitions(chrome_driver, 1741)
-        pickle_out = open("events.pickle","wb")
-        pickle.dump(baileys, pickle_out)
-        pickle_out.close()
+        # baileys = competitor_competitions(chrome_driver, 1741)
+        # pickle_out = open("events.pickle","wb")
+        # pickle.dump(baileys, pickle_out)
+        # pickle_out.close()
         # pickle_out = open("climberIDs.pickle", "wb")
         # pickle.dump(climberIDs, pickle_out)
         # pickle_out.close()
@@ -208,4 +261,6 @@ if __name__ == '__main__':
         # pickle_out = open("ranks.pickle", "wb")
         # pickle.dump(ranks, pickle_out)
         # pickle_out.close()
+
+        iterate_events([468, 1235], 3)
     
