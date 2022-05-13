@@ -5,6 +5,7 @@ from time import sleep
 from typing import Iterable
 
 import concurrent.futures
+from multiprocessing import Pool
 
 import pickle
 
@@ -28,7 +29,9 @@ from climber import Climber
 from rank import Rank
 
 
-DELAY = 5  # number of seconds to wait until timeout for WebDriverWait
+NUM_WORKERS = 20
+
+DELAY = 1  # number of seconds to wait until timeout for WebDriverWait
 BETWEEN = 0  # number of seconds to wait between separate scrapes
 
 climberIDs = list()
@@ -188,45 +191,77 @@ def get_rankings(driver: webdriver):
     return ranks
 
 
-def scrape_event(driver: webdriver, event_id: int, type: int):
+def scrape_event(event_range: list[int], type: int):
+    driver = setup_driver()
     types = ["", "Lead", "Speed", "Boulder"]
     events = []
     
-    driver.get(f'https://components.ifsc-climbing.org/result-complete/?event={event_id}&result={type}')
-    try:
-        WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.ID, 'table_id_wrapper')))
-        html = driver.page_source
-        soup = BeautifulSoup(html, 'html.parser')
+    for event_id in tqdm(event_range):
+        driver.get(f'https://components.ifsc-climbing.org/result-complete/?event={event_id}&result={type}')
+        try:
+            WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.ID, 'table_id_wrapper')))
+            html = driver.page_source
+            soup = BeautifulSoup(html, 'html.parser')
 
 
-        # datestr = soup.find('div', class_='date').text.strip()
-        # date = datetime.strptime(datestr, '%A, %d %B %Y')
-        date = 0
-        location = soup.find('h1', class_='event_title').getText().strip().split('-')[-1].split(')')[0].strip()
-        if location.isnumeric():
-            location = soup.find('h1', class_='event_title').getText().strip().split('- ')[-2].split(')')[0].strip()
-        location += ')'
-        # _, result_id = soup.find('a')['href'].split('event=')[1].split('&result=')
+            # datestr = soup.find('div', class_='date').text.strip()
+            # date = datetime.strptime(datestr, '%A, %d %B %Y')
+            date = 0
+            location = soup.find('h1', class_='event_title').getText().strip().split('-')[-1].split(')')[0].strip()
+            if location.isnumeric():
+                location = soup.find('h1', class_='event_title').getText().strip().split('- ')[-2].split(')')[0].strip()
+            location += ')'
+            # _, result_id = soup.find('a')['href'].split('event=')[1].split('&result=')
 
-        results = parse_results(html)
-        events.append(Event(event_id, 0, types[type], location, date, results))
+            results = parse_results(html)
+            events.append(Event(event_id, 0, types[type], location, date, results))
 
-    except TimeoutException: 
-        pass
+        except TimeoutException: 
+            continue
+
+    return events
 
 
-def iterate_events(event_range, type: int):
+def iterate_events_threading(event_range, type: int):
     # event range 468-1235
 
     events = []
-    drivers = [setup_fx_driver() for _ in range(30)]
+    # drivers = [setup_driver() for _ in range(NUM_WORKERS)]
+    chunked_events = chunks(event_range, NUM_WORKERS)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
-        future = executor.map(scrape_event, drivers, event_range, type)
-        events = future.result()
-        print(events)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
+        future = executor.map(scrape_event, chunked_events, [type for _ in range(NUM_WORKERS)])
+        
+        events = [event for event in future]
     
+    print(events)
     return events
+
+
+def iterate_events_multproc(event_range, type: int):
+    # event range 468-1235
+
+    events = []
+    chunked_events = list(chunks(event_range, NUM_WORKERS))
+    types_itr = [type for _ in range(NUM_WORKERS)]
+
+    p = Pool(NUM_WORKERS)
+    results = p.starmap(scrape_event, [(a, b) for a, b in zip(chunked_events, types_itr)])
+    p.terminate()
+    p.join()
+    
+    events = [event for event in results]
+    
+    print(events)
+    return events
+
+
+
+def chunks(lst, n):
+    """Yield n successive chunks from lst."""
+    size = len(lst)//n
+    for i in range(0, len(lst), size):
+        yield lst[i:i + size]
 
 
 def setup_driver() -> webdriver:
@@ -240,8 +275,9 @@ def setup_driver() -> webdriver:
 if __name__ == '__main__':
     options = Options()
     options.add_argument('--headless')
+    iterate_events_threading([event_id for event_id in range(468, 1236)], 3)
 
-    with webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options) as chrome_driver:
+    # with webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options) as chrome_driver:
         # UNCOMMENT LINES IF ClimberIDs pickle file has been populated
         # climbers = scrape_climbers(chrome_driver)
         # pickle_out = open("climbers.pickle", "wb")
@@ -262,5 +298,5 @@ if __name__ == '__main__':
         # pickle.dump(ranks, pickle_out)
         # pickle_out.close()
 
-        iterate_events([468, 1235], 3)
+        
     
